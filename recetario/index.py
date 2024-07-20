@@ -10,27 +10,23 @@ order = 0
 
 while order != 6:
     cat_dir = Path(os.getcwd()) / 'Recetas'
-    print(f'Welcome! The path to the recipes directory is: {cat_dir}')
+    print(f'Welcome to the recipe manager! \nThe recipes are inside: {cat_dir}')
     print(f'Number of recipes: {len(list(Path(cat_dir).glob("**/*.txt")))}')
     order = select_option(menu_options)
 
     match order:
         case 1:
             print('Categories:')
-            category = select_cat(get_cat(cat_dir))
-            recipes_dir = cat_dir / category
+            recipes_dir = select_cat(cat_dir)
 
-            recipe_name = select_recipe(get_recipe(recipes_dir))
-            recipe_path = recipes_dir / (recipe_name + '.txt')
-            recipe_file = open(recipe_path)
-            print(recipe_file.read())
-            recipe_file.close()
+            recipe_name = select_recipe(recipes_dir)
+            if recipe_name != 0:
+                read_recipe(recipes_dir, recipe_name)
             press_q()
 
         case 2:
             print('Recipes:')
-            category = select_cat(get_cat(cat_dir))
-            recipes_dir = Path(cat_dir) / category
+            recipes_dir = select_cat(cat_dir)
             create_recipe(recipes_dir)
 
             press_q()
@@ -41,19 +37,17 @@ while order != 6:
 
         case 4:
             print('Categories:')
-            category = select_cat(get_cat(cat_dir))
-            recipes_dir = cat_dir / category
+            recipes_dir = select_cat(cat_dir)
 
-            recipe_name = select_recipe(get_recipe(recipes_dir))
-            recipe_path = recipes_dir / (recipe_name + '.txt')
-            delete_recipe(recipe_path)
+            recipe_name = select_recipe(recipes_dir)
+            if recipe_name != 0:
+                delete_recipe(recipes_dir, recipe_name)
             press_q()
 
         case 5:
             print('What category do you want to delete?:')
-            category = select_cat(get_cat(cat_dir))
-            cat_dir = cat_dir / category
-            delete_category(cat_dir)
+            recipes_dir = select_cat(cat_dir)
+            delete_category(recipes_dir)
             press_q()
 
         case 6:

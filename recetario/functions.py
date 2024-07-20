@@ -6,22 +6,32 @@ import keyboard
 
 def select_option(menu_options):
     # Forces the user to select an option and write it in the correct format.
-    # Returns the option selected (an int)
-    print(menu_options)
-    while True:
-        try:
-            order = int(input('Select the option (write the number): '))
-            if order > 6 or order < 1:
-                raise ValueError
-            break
-        except ValueError:
+    # Returns the option selected
+    order = 'x'
+    while not order.isnumeric() or int(order) not in range(1, 7):
+        print(menu_options)
+        order = input('Select the option (write the number): ')
+        if not order.isnumeric() or int(order) not in range(1, 7):
             system('cls')
-            print(menu_options)
             print('Invalid input. Please enter a number from 1 to 6.')
-    return order
+    return int(order)
 
 
 # CATEGORIES
+
+
+def select_cat(cat_dir):
+    # Forces the user to select a category and write it in the correct format.
+    categories = get_cat(cat_dir)
+    option = 'x'
+    while not option.isnumeric() or int(option) not in range(1, len(categories)+1):
+        show_cat(categories)
+        option = input('Select the category (write the number): ')
+        if not option.isnumeric() or int(option) not in range(1, len(categories)):
+            system('cls')
+            print(f'Invalid input. Please enter a number from 1 to {len(categories)}.')
+    print('*' * 50)
+    return cat_dir / categories[int(option)]
 
 
 def get_cat(recipe_dir):
@@ -33,22 +43,6 @@ def get_cat(recipe_dir):
         cat_dict[x] = item.name
         x += 1
     return cat_dict
-
-
-def select_cat(categories):
-    # Forces the user to select a category and write it in the correct format.
-    show_cat(categories)
-    while True:
-        try:
-            option = int(input('Select a category (write the number): '))
-            if option > len(categories) or option < 1:
-                raise ValueError
-            break
-        except ValueError:
-            system('cls')
-            show_cat(categories)
-            print(f'Invalid input. Please enter a number from 1 to {len(categories)}.')
-    return categories[option]
 
 
 def show_cat(categories):
@@ -75,6 +69,29 @@ def delete_category(category_path):
 
 # RECIPES
 
+def read_recipe(recipes_dir, recipe_name):
+    recipe_path = recipes_dir / (recipe_name + '.txt')
+    recipe_file = open(recipe_path)
+    print(recipe_file.read())
+    recipe_file.close()
+
+def select_recipe(recipe_dir):
+    # Forces the user to select a recipe and write it in the correct format.
+    recipes = get_recipe(recipe_dir)
+    if len(recipes) != 0:
+        option = 'x'
+        while not option.isnumeric() or int(option) not in range(1, len(recipes)+1):
+            show_recipes(recipes)
+            option = input('\nSelect the recipe (write the number): ')
+            if not option.isnumeric() or int(option) not in range(1, len(recipes)):
+                system('cls')
+                print(f'Invalid input. Please enter a number from 1 to {len(recipes)}.')
+        print('*' * 50)
+        return recipes[int(option)]
+    else:
+        print('Empty category')
+        return 0
+
 
 def get_recipe(recipe_dir):
     # Returns a dictionary with keys as number associated to the recipe and value as the name of the recipe.
@@ -85,22 +102,6 @@ def get_recipe(recipe_dir):
         cat_dict[x] = ruta.stem
         x += 1
     return cat_dict
-
-
-def select_recipe(recipes):
-    # Forces the user to select a recipe and write it in the correct format.
-    show_recipes(recipes)
-    while True:
-        try:
-            option = int(input('Select a recipe (write the number): '))
-            if option > len(recipes) or option < 1:
-                raise ValueError
-            break
-        except ValueError:
-            system('cls')
-            show_recipes(recipes)
-            print(f'Invalid input. Please enter a number from 1 to {len(recipes)}.')
-    return recipes[option]
 
 
 def show_recipes(recipes):
@@ -123,8 +124,10 @@ def create_recipe(recipes_dir):
     new_file.write(recipe_description)
 
 
-def delete_recipe(recipe_path):
+def delete_recipe(recipes_dir, recipe_name):
+    recipe_path = recipes_dir / (recipe_name + '.txt')
     os.remove(recipe_path)
+
 
 def press_q():
     # Waits until the user presses 'q' keyboard and clears the console
