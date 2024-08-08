@@ -67,6 +67,9 @@ desserts_list = ['Pastel', 'Cheesecake', 'Carrotcake', 'Flan', 'Crema catalana',
 # Food items
 counter = 0
 food_var = []
+food_inputs = []
+food_text = []
+# Create checkboxes
 for food in foods_list:
     food_var.append('')
     food_var[counter] = IntVar()
@@ -75,11 +78,19 @@ for food in foods_list:
                               offvalue=0, variable=food_var[counter])
     # stick is for justify content to the left
     food_button.grid(row=counter, column=0, sticky=W)
+    food_inputs.append('')
+    food_text.append('')
+    food_inputs[counter] = Entry(food_panel, font=('Dosis', 18, 'bold'),
+                                 bd=1, width=6, state=DISABLED, textvariable=food_text[counter])
+    food_inputs[counter].grid(row=counter, column=1)
     counter += 1
+
 
 # Drinks items
 counter = 0
 drinks_var = []
+drinks_inputs = []
+drinks_text = []
 for drink in drinks_list:
     drinks_var.append('')
     drinks_var[counter] = IntVar()
@@ -88,11 +99,18 @@ for drink in drinks_list:
                                 onvalue=1, offvalue=0, variable=drinks_var[counter])
     # stick is for justify content to the left
     drinks_button.grid(row=counter, column=0, sticky=W)
+    drinks_inputs.append('')
+    drinks_text.append('')
+    drinks_inputs[counter] = Entry(drinks_panel, font=('Dosis', 18, 'bold'),
+                                 bd=1, width=6, state=DISABLED, textvariable=drinks_text[counter])
+    drinks_inputs[counter].grid(row=counter, column=1)
     counter += 1
 
 # Desserts items
 counter = 0
 desserts_var = []
+desserts_inputs = []
+desserts_text = []
 for dessert in desserts_list:
     desserts_var.append('')
     desserts_var[counter] = IntVar()
@@ -101,6 +119,11 @@ for dessert in desserts_list:
                                   onvalue=1, offvalue=0, variable=desserts_var[counter])
     # stick is for justify content to the left
     desserts_button.grid(row=counter, column=0, sticky=W)
+    desserts_inputs.append('')
+    desserts_text.append('')
+    desserts_inputs[counter] = Entry(desserts_panel, font=('Dosis', 18, 'bold'),
+                                   bd=1, width=6, state=DISABLED, textvariable=desserts_text[counter])
+    desserts_inputs[counter].grid(row=counter, column=1)
     counter += 1
 
 # Run app
