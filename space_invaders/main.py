@@ -9,7 +9,7 @@ pygame.init()
 # Create the screen
 screen = pygame.display.set_mode((800, 600))
 
-# Background img
+# Background employees
 background_img = pygame.image.load('img/galaxy.png')
 
 # Title and icon
