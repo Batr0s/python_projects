@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de pendiente</title>
+    <style>
+        body {
+            background-color: #e2c6ff;
+            font-family: "Oswald", sans-serif;
+            padding-top: 60px;
+        }
+
+        .container {
+            max-width: 550px;
+            margin: auto;
+            background-color: #fffac3;
+            padding: 10px;
+            webkit-box-shadow: 2px 2px 13px -4px rgba(0, 0, 0.21);
+            box-shadow: 2px 2px 13px -4px rgba(0, 0, 0.21);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+        }
+
+        a, p {
+            color: #c59aff;
+        }
+
+        .barra-superior {
+            display: flex;
+            justify-content: space-between;
+            color: white;
+            padding: 10px;
+            border-radius: 5px 5px 0px 0px;
+            background: linear-gradient(90deg, #ffb843 0%, #ff7a29 50%, #ff4d29 100%);
+        }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+</body>
+</html>
